@@ -1,0 +1,5 @@
+What I installed before starting Mosaic project :
+gem install bundler
+brew install pkconfig
+brew install imagemagick@6
+brew link imagemagick@6 --force
