@@ -1,10 +1,7 @@
-require 'json'
+require 'rmagick'
+include Magick
 
-file = File.read("cats.json")
-data = JSON.parse(file);
-#puts data
-#puts data.keys
-#puts data['cats']
-photo = data['cats']
-puts photo[0]
-puts photo[1]['src']
+cat = ImageList.new("cachou.jpg")
+cat.display
+exit
+
