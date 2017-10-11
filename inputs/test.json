@@ -7,8 +7,8 @@
 			"src": "https://s-media-cache-ak0.pinimg.com/originals/1f/ac/f8/1facf8be7169399db7a9eec43d8b54f7.jpg",
 			"hight": 50,
 			"width": 50,
-			"pos_x": 0,
-			"pos_y": 0
+			"pos_x": 1,
+			"pos_y": 1
 		},
 		{
 			"src": "http://hairstylecamp.com/wp-content/uploads/cat-1.jpg",
@@ -28,8 +28,8 @@
 			"src": "https://foodtank.com/wp-content/uploads/2017/03/Food-Tank-Keri-Glassman-interview.jpg",
 			"hight": 50,
 			"width": 50,
-			"pos_x": 1,
-			"pos_y": 1
+			"pos_x": 0,
+			"pos_y": 0
 		}
 	]
 }

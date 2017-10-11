@@ -2,25 +2,27 @@ require 'json'
 require 'rmagick'
 include Magick
 
-def is_sorted(a, b)
-	if (a[pos_y] == b[pos_y])
-		if (a[pos_x] < b[pos_x])
-			return 1
-		else
-			return 0
-		end
-	elsif (a[pos_y] < b[pos_y])
-		return 1
-	else
-		return 0
-	end
-end
+#def is_sorted(a, b)
+#	if (a[pos_y] == b[pos_y])
+#		if (a[pos_x] < b[pos_x])
+#			return 1
+#		else
+#			return 0
+#		end
+#	elsif (a[pos_y] < b[pos_y])
+#		return 1
+#	else
+#		return 0
+#	end
+#end
 
 
 # Get the data from json file
 file = File.read('inputs/test.json')
 data = JSON.parse(file)
 photos = data['photos']
+puts photos
+puts '****************************'
 
 # Modify data of each photo
 photos.each do |elem|
@@ -29,7 +31,8 @@ photos.each do |elem|
 end
 
 # Sort the array 'photos'
-photos = photos.sort { |a, b| a[pos_y, pos_x] <=> b[pos_y, pos_x] }
+#photos = photos.sort { |a, b| a[pos_y, pos_x] <=> b[pos_y, pos_x] }
+photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']]}
 
 puts photos
 
