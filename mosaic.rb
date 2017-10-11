@@ -22,6 +22,7 @@ y = 2
 col = 0
 row = 0
 page = Rectangle.new(0, 0, 0, 0)
+img.scene = 0
 y.times do
 	tmp_row = 0
 	col = 0
