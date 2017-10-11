@@ -36,9 +36,16 @@ photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']]}
 puts photos
 puts '****************************'
 
+# Get the photo in ImageList
+img = ImageList.new
+photos.each do |elem|
+	img.read(elem['src'])
+	img.background_color = 'black'
+end
+
+
 y = photos.uniq { |elem| elem['pos_y'] }.length
 puts y
-
 #rslt = Image.new(2000, 2000) {
 #	self.background_color = "black"
 #	self.format = 'JPG'
