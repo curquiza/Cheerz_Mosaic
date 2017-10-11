@@ -41,15 +41,15 @@ img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
+	img.resize_to_fit!(elem['width'], elem['hight'])
 end
 
-
-y = photos.uniq { |elem| elem['pos_y'] }.length
-
+# Construct the mosaic
 col = 0
 row = 0
 page = Rectangle.new(0, 0, 0, 0)
 img.scene = 0
+y = photos.uniq { |elem| elem['pos_y'] }.length
 y.times do |j|
 	tmp_row = 0
 	col = 0
@@ -67,6 +67,7 @@ end
 
 mosaic = img.mosaic
 mosaic.write("momo.jpg")
+
 
 #rslt = Image.new(2000, 2000) {
 #	self.background_color = "black"
