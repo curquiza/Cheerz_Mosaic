@@ -41,7 +41,15 @@ img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
+	puts "col de base = #{img.columns}"
+	puts "row de base = #{img.rows}"
+	puts '----'
 	img.resize_to_fit!(elem['width'], elem['hight'])
+	puts "col de base = #{img.columns}"
+	puts "row de base = #{img.rows}"
+	puts '----'
+	puts '----'
+	#img.scale(elem['width'], elem['hight'])
 end
 
 # Construct the mosaic
@@ -67,6 +75,14 @@ end
 
 mosaic = img.mosaic
 mosaic.write("momo.jpg")
+
+# Contruct the image resulting
+rslt = Image.new(data['width'], data['hight']) {
+	self.background_color = "black"
+	self.format = 'JPG'
+}
+rslt.composite!(mosaic, 0, 0, OverCompositeOp)
+rslt.write("rslt.jpg")
 
 
 #rslt = Image.new(2000, 2000) {
