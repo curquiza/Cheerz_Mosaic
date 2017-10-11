@@ -31,10 +31,13 @@ photos.each do |elem|
 end
 
 # Sort the array 'photos'
-#photos = photos.sort { |a, b| a[pos_y, pos_x] <=> b[pos_y, pos_x] }
 photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']]}
 
 puts photos
+puts '****************************'
+
+y = photos.uniq { |elem| elem['pos_y'] }.length
+puts y
 
 #rslt = Image.new(2000, 2000) {
 #	self.background_color = "black"
