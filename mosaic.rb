@@ -1,15 +1,10 @@
 require 'rmagick'
 include Magick
 
-#cat = ImageList.new("chat1.jpg")
-#cat.minify!
-#cat.write("rslt.jpg")
-
 rslt = Image.new(2000, 2000) {
 	self.background_color = "black"
-	#self.quality = 75
+	self.format = 'JPG'
 }
-puts "filesize = #{rslt.filesize}"
 
 img = ImageList.new
 img.read("http://www.zoomalia.com/cat_img/cat-2.jpg")
@@ -34,8 +29,6 @@ y.times do
 	x.times do
 		page.x = col
 		page.y = row
-		puts img.quality
-		puts img.filesize
 		img.page = page
 		col += img.columns
 		tmp_row = img.rows if (tmp_row < img.rows)
@@ -45,14 +38,11 @@ y.times do
 end
 
 momo = img.mosaic
-
 rslt.composite!(momo, 0, 0, OverCompositeOp)
 
-#blob = rslt.to_blob { self.quality = 2 }
-#puts "blob.bytesize = #{blob.bytesize}"
+blob = rslt.to_blob { self.quality = 1 }
+puts "blob.bytesize = #{blob.bytesize}"
 
-rslt.write("rslt.jpg") {
-	self.quality = 2
-}
+rslt.write("rslt.jpg") { self.quality = 1 }
 puts "filesize = #{rslt.filesize}"
 
