@@ -5,6 +5,8 @@ include Magick
 #cat.minify!
 #cat.write("rslt.jpg")
 
+rslt = Image.new(1000, 1000)
+
 img = ImageList.new
 img.read("chat1.jpg")
 img.read("chat2.jpg")
@@ -27,10 +29,11 @@ img.read("chat4.jpg")
 momo = img.montage {
 	#self.compose = UndefinedCompositeOp
 	self.tile = "4x1"
-	self.geometry = "50x50+0+0"
+	self.geometry = "200x200+0+0"
 	self.border_width = 0
 }
 
-momo.write("rslt.jpg") {
-	self.size = "500x500+0+0"
-}
+rslt.composite!(momo, 0, 0, OverCompositeOp)
+
+rslt.write("rslt.jpg")
+
