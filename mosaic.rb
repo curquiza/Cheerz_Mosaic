@@ -44,7 +44,20 @@ photos.each do |elem|
 	puts "col de base = #{img.columns}"
 	puts "row de base = #{img.rows}"
 	puts '----'
-	img.resize_to_fit!(elem['width'], elem['hight'])
+	
+	#img.resize_to_fit!(elem['width'], elem['hight'])
+	#img.thumbnail!(elem['width'], elem['hight'])
+	#img.sample!(elem['width'], elem['hight'])
+	#img.resize!(elem['width'], elem['hight'])
+	if (img.columns <= elem['width'] || img.rows <= elem['hight'])
+		img.scale!(3)
+		puts "col de base = #{img.columns}"
+		puts "row de base = #{img.rows}"
+		puts '----'
+		img.crop!(CenterGravity, elem['width'], elem['hight'])
+	else
+		img.crop!(CenterGravity, elem['width'], elem['hight'])
+	end
 	puts "col de base = #{img.columns}"
 	puts "row de base = #{img.rows}"
 	puts '----'
