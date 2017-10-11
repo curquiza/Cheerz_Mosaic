@@ -12,42 +12,32 @@ img.read("chat1.jpg")
 img.read("chat2.jpg")
 img.read("chat3.jpg")
 img.read("chat4.jpg")
+img.read("http://www.animaniacs.fr/wp-content/uploads/2016/05/chat-noir.jpg")
+img.read("https://www.wanimo.com/veterinaire/images/articles/chat/chaton-diarrhee.jpg")
 
-#cpy = ImageList.new
-#page = Rectangle.new(0, 0, 0, 0)
-#4.times do |i|
-#	cpy << img.scale(110, 100)
-#	page.x = i * cpy.columns
-#	page.y = 0
-#	cpy.page = page
-#	(img.scene += 1) rescue img.scene = 0
-#end
+
+x = 3
+y = 2
 
 col = 0
 row = 0
 page = Rectangle.new(0, 0, 0, 0)
-3.times do
-	page.x = col
-	col += img.columns
-	page.y = 0
-	if (row < img.rows)
-		row = img.rows
+y.times do
+	tmp_row = 0
+	col = 0
+	x.times do
+		puts img.base_filename
+		page.x = col
+		page.y = row
+		img.page = page
+		col += img.columns
+		tmp_row = img.rows if (tmp_row < img.rows)
+		(img.scene += 1) rescue img.scene = 0
 	end
-	img.page = page
-	(img.scene += 1) rescue img.scene = 0
+	row += tmp_row
 end
-page.x = 0
-page.y = row
-#img.page.x = 0
-#img.page.y = row
-img.page = page
 
 momo = img.mosaic
-
-#momo = img.montage {
-#	self.tile = "2x2"
-#	self.geometry = "200x200+0+0"
-#}
 
 rslt.composite!(momo, 0, 0, OverCompositeOp)
 
