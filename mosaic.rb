@@ -7,12 +7,13 @@ include Magick
 
 rslt = Image.new(2000, 2000) {
 	self.background_color = "black"
+	#self.quality = 75
 }
+puts "filesize = #{rslt.filesize}"
 
 img = ImageList.new
-img.read("http://www.zoomalia.com/cat_img/cat-2.jpg") {
-	self.background_color = "black"
-}
+img.read("http://www.zoomalia.com/cat_img/cat-2.jpg")
+img.background_color = "black"
 img.read("https://www.consoglobe.com/wp-content/uploads/2016/09/shutterstock_172105073-chaton-litieres-pour-chat.jpg")
 img.read("https://www.wanimo.com/veterinaire/images/articles/chat/question_du_mois-chat.jpg")
 img.read("https://www.royalcanin.fr/wp-content/uploads/chat-male-ou-femelle.jpg")
@@ -33,6 +34,8 @@ y.times do
 	x.times do
 		page.x = col
 		page.y = row
+		puts img.quality
+		puts img.filesize
 		img.page = page
 		col += img.columns
 		tmp_row = img.rows if (tmp_row < img.rows)
@@ -45,6 +48,11 @@ momo = img.mosaic
 
 rslt.composite!(momo, 0, 0, OverCompositeOp)
 
+#blob = rslt.to_blob { self.quality = 2 }
+#puts "blob.bytesize = #{blob.bytesize}"
 
-rslt.write("rslt.jpg")
+rslt.write("rslt.jpg") {
+	self.quality = 2
+}
+puts "filesize = #{rslt.filesize}"
 
