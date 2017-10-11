@@ -31,7 +31,7 @@ photos.each do |elem|
 end
 
 # Sort the array 'photos'
-photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']]}
+photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']] }
 
 puts photos
 puts '****************************'
@@ -45,7 +45,29 @@ end
 
 
 y = photos.uniq { |elem| elem['pos_y'] }.length
-puts y
+
+col = 0
+row = 0
+page = Rectangle.new(0, 0, 0, 0)
+img.scene = 0
+y.times do |j|
+	tmp_row = 0
+	col = 0
+	x = photos.count { |elem| elem['pos_y'] == j}
+	x.times do
+		page.x = col
+		page.y = row
+		img.page = page
+		col += img.columns
+		tmp_row = img.rows if (tmp_row < img.rows)
+		(img.scene += 1) rescue img.scene = 0
+	end
+	row += tmp_row
+end
+
+mosaic = img.mosaic
+mosaic.write("momo.jpg")
+
 #rslt = Image.new(2000, 2000) {
 #	self.background_color = "black"
 #	self.format = 'JPG'
