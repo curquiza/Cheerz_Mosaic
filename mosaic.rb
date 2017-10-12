@@ -2,21 +2,6 @@ require 'json'
 require 'rmagick'
 include Magick
 
-#def is_sorted(a, b)
-#	if (a[pos_y] == b[pos_y])
-#		if (a[pos_x] < b[pos_x])
-#			return 1
-#		else
-#			return 0
-#		end
-#	elsif (a[pos_y] < b[pos_y])
-#		return 1
-#	else
-#		return 0
-#	end
-#end
-
-
 # Get the data from json file
 file = File.read('inputs/test.json')
 data = JSON.parse(file)
@@ -41,28 +26,28 @@ img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
-	puts "col de base = #{img.columns}"
-	puts "row de base = #{img.rows}"
+	puts "elem['width'] = #{elem['width']}"
+	puts "elem['hight'] = #{elem['hight']}"
 	puts '----'
-	
-	#img.resize_to_fit!(elem['width'], elem['hight'])
-	#img.thumbnail!(elem['width'], elem['hight'])
-	#img.sample!(elem['width'], elem['hight'])
-	#img.resize!(elem['width'], elem['hight'])
-	if (img.columns <= elem['width'] || img.rows <= elem['hight'])
-		img.scale!(3)
-		puts "col de base = #{img.columns}"
-		puts "row de base = #{img.rows}"
+	puts "col debut = #{img.columns}"
+	puts "row debut = #{img.rows}"
+	puts '----'
+
+	# Resize
+	#size = 1.2
+	while (img.columns <= elem['width'] || img.rows <= elem['hight'])
+		img.scale!(1.2)
+		#size += 0.2
+		puts "col loop = #{img.columns}"
+		puts "row loop = #{img.rows}"
 		puts '----'
-		img.crop!(CenterGravity, elem['width'], elem['hight'])
-	else
-		img.crop!(CenterGravity, elem['width'], elem['hight'])
 	end
-	puts "col de base = #{img.columns}"
-	puts "row de base = #{img.rows}"
+	img.crop!(CenterGravity, elem['width'], elem['hight'])
+	puts "col finale = #{img.columns}"
+	puts "row finale = #{img.rows}"
 	puts '----'
-	puts '----'
-	#img.scale(elem['width'], elem['hight'])
+	puts ''
+
 end
 
 # Construct the mosaic
