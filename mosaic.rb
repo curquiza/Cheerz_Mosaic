@@ -2,6 +2,15 @@ require 'json'
 require 'rmagick'
 include Magick
 
+def calc_quality(filesize, rslt)
+	quality = 1
+	size = filesize * 1000
+	while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
+		quality += 1
+	end
+	return quality
+end
+
 # Get the data from json file
 if (ARGV.empty? == true)
 	exit
@@ -11,8 +20,6 @@ filename = ARGV[0][index..-1]
 file = File.read(ARGV[0]) rescue exit
 data = JSON.parse(file)
 photos = data['photos']
-puts photos
-puts '****************************'
 
 # Modify data of each photo
 photos.each do |elem|
@@ -23,43 +30,24 @@ end
 # Sort the array 'photos'
 photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']] }
 
-puts photos
-puts '****************************'
-
 # Get the photo in ImageList
 img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
-	puts "width attendue = #{elem['width']}"
-	puts "hight attendue = #{elem['hight']}"
-	puts '----'
-	puts "col debut = #{img.columns}"
-	puts "row debut = #{img.rows}"
-	puts '----'
 
 	# Resize
 	fact = 0.2
 	if (img.columns <= elem['width'] || img.rows <= elem['hight'])
 		while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
 			img.scale!(1 + fact)
-			puts "col loop = #{img.columns}"
-			puts "row loop = #{img.rows}"
-			puts '----'
 		end
 	else
 		while (img.columns * (1 - fact) >= elem['width'] && img.rows * (1 - fact) >= elem['hight']) do
 			img.scale!(1 - fact)
-			puts "col loop = #{img.columns}"
-			puts "row loop = #{img.rows}"
-			puts '----'
 		end
 	end
 	img.crop!(CenterGravity, elem['width'], elem['hight'])
-	puts "col finale = #{img.columns}"
-	puts "row finale = #{img.rows}"
-	puts '----'
-	puts ''
 
 end
 
@@ -94,15 +82,13 @@ rslt = Image.new(data['width'], data['hight']) {
 rslt.composite!(mosaic, 0, 0, OverCompositeOp)
 
 # Calculate the quality
-quality = 1
-size = data['filesize'] * 1000
-while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
-	quality += 1
-end
+quality = calc_quality(data['filesize'], rslt)
+#quality = 1
+#size = data['filesize'] * 1000
+#while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
+#	quality += 1
+#end
 
 # Write the result
-puts "Quality = #{quality}"
-puts "filesize asked = #{size}"
 rslt.write("outputs/rslt_" + filename[0..-6] + ".jpg") { self.quality = quality } \
 rescue rslt.write("rslt_" + filename[0..-6] + ".jpg") { self.quality = quality }
-puts "filesize = #{rslt.filesize}"
