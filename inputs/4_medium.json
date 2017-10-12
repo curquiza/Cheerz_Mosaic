@@ -1,0 +1,35 @@
+{
+	"filesize": 200,
+	"hight": 600,
+	"width" : 600,
+	"photos": [
+		{
+			"src": "https://s-media-cache-ak0.pinimg.com/originals/1f/ac/f8/1facf8be7169399db7a9eec43d8b54f7.jpg",
+			"hight": 50,
+			"width": 50,
+			"pos_x": 1,
+			"pos_y": 1
+		},
+		{
+			"src": "http://hairstylecamp.com/wp-content/uploads/cat-1.jpg",
+			"hight": 50,
+			"width": 50,
+			"pos_x": 1,
+			"pos_y": 0
+		},
+		{
+			"src": "https://avante.biz/wp-content/uploads/Cat-Wallpapers-1920x1080/Cat-Wallpapers-1920x1080-051.jpg",
+			"hight": 50,
+			"width": 50,
+			"pos_x": 0,
+			"pos_y": 1
+		},
+		{
+			"src": "http://www.kamemivillage.com/img/market.jpg",
+			"hight": 50,
+			"width": 50,
+			"pos_x": 0,
+			"pos_y": 0
+		}
+	]
+}
