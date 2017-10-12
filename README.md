@@ -4,7 +4,7 @@
 
 A ruby script in command-line to create a mosaic based on the images passed in argument
 
-**Input : one JSON file with**
+**Input : a JSON file with**
  - 'filesize' : the size in Ko of the mosaic
  - 'hight' : hight of the mosaic
  - 'width' : width of the mosaic
@@ -15,7 +15,7 @@ A ruby script in command-line to create a mosaic based on the images passed in a
    - 'hight' : hight of the image of the mosaic size in %
    - 'width' : width of the image of the mosaic size in %
 
-**Output : one JPG file**
+**Output : a JPG file**
 
 
 ## How to use ##
