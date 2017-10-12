@@ -8,7 +8,7 @@ def calc_quality(filesize, rslt)
 	while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
 		quality += 1
 	end
-	return quality
+	quality
 end
 
 def resize_img(fact, img, elem_photos)
@@ -22,15 +22,12 @@ def resize_img(fact, img, elem_photos)
 		end
 	end
 	img.crop!(CenterGravity, elem_photos['width'], elem_photos['hight'])
-	return img
+	img
 end
 
 # Get the data from json file
-if (ARGV.empty? == true)
-	exit
-end
-(index = ARGV[0].rindex('/') + 1) rescue index = 0
-filename = ARGV[0][index..-1]
+exit if ARGV.empty?
+filename = File.basename(ARGV[0])
 file = File.read(ARGV[0]) rescue exit
 data = JSON.parse(file)
 photos = data['photos']
