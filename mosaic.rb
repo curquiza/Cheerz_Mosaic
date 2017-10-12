@@ -3,9 +3,9 @@ require 'rmagick'
 include Magick
 
 # Get the data from json file
-#file = File.read('inputs/4_big.json')
+file = File.read('inputs/4_big.json')
 #file = File.read('inputs/4_little.json')
-file = File.read('inputs/4_medium.json')
+#file = File.read('inputs/4_medium.json')
 data = JSON.parse(file)
 photos = data['photos']
 puts photos
