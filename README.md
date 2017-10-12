@@ -19,8 +19,12 @@ Output : one JPG file
 
 ## How to use ##
 
-`` `bundle install
-ruby mosaic.rb inputs/[file.json]` ``
+```bash
+bundle install
+ruby mosaic.rb inputs/[file.json]
+```
 
 To run all inputs :
-`` `sh run_tests.sh` ``
+```bash
+sh run_tests.sh
+```
