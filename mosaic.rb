@@ -26,21 +26,29 @@ img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
-	puts "elem['width'] = #{elem['width']}"
-	puts "elem['hight'] = #{elem['hight']}"
+	puts "width attendue = #{elem['width']}"
+	puts "hight attendue = #{elem['hight']}"
 	puts '----'
 	puts "col debut = #{img.columns}"
 	puts "row debut = #{img.rows}"
 	puts '----'
 
 	# Resize
-	#size = 1.2
-	while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
-		img.scale!(1.2)
-		#size += 0.2
-		puts "col loop = #{img.columns}"
-		puts "row loop = #{img.rows}"
-		puts '----'
+	fact = 0.2
+	if (img.columns <= elem['width'] || img.rows <= elem['hight'])
+		while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
+			img.scale!(1 + fact)
+			puts "col loop = #{img.columns}"
+			puts "row loop = #{img.rows}"
+			puts '----'
+		end
+	else
+		while (img.columns * (1 - fact) >= elem['width'] && img.rows * (1 - fact) >= elem['hight']) do
+			img.scale!(1 - fact)
+			puts "col loop = #{img.columns}"
+			puts "row loop = #{img.rows}"
+			puts '----'
+		end
 	end
 	img.crop!(CenterGravity, elem['width'], elem['hight'])
 	puts "col finale = #{img.columns}"
@@ -59,7 +67,7 @@ y = photos.uniq { |elem| elem['pos_y'] }.length
 y.times do |j|
 	tmp_row = 0
 	col = 0
-	x = photos.count { |elem| elem['pos_y'] == j}
+	x = photos.count { |elem| elem['pos_y'] == j }
 	x.times do
 		page.x = col
 		page.y = row
