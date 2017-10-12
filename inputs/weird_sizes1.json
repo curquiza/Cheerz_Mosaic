@@ -1,0 +1,35 @@
+{
+	"filesize": 200,
+	"hight": 2000,
+	"width" : 1500,
+	"photos": [
+		{
+			"src": "http://stevendavisphoto.com/wp-content/uploads/2015/05/wanaka-sunrise.jpg",
+			"hight": 10,
+			"width": 50,
+			"pos_x": 1,
+			"pos_y": 1
+		},
+		{
+			"src": "http://hairstylecamp.com/wp-content/uploads/cat-1.jpg",
+			"hight": 10,
+			"width": 50,
+			"pos_x": 1,
+			"pos_y": 0
+		},
+		{
+			"src": "http://i.imgur.com/M0DynYB.jpg",
+			"hight": 50,
+			"width": 10,
+			"pos_x": 0,
+			"pos_y": 1
+		},
+		{
+			"src": "http://www.kamemivillage.com/img/market.jpg",
+			"hight": 50,
+			"width": 10,
+			"pos_x": 0,
+			"pos_y": 0
+		}
+	]
+}
