@@ -11,6 +11,20 @@ def calc_quality(filesize, rslt)
 	return quality
 end
 
+def resize_img(fact, img, elem_photos)
+	if (img.columns <= elem_photos['width'] || img.rows <= elem_photos['hight'])
+		while (img.columns <= elem_photos['width'] || img.rows <= elem_photos['hight']) do
+			img.scale!(1 + fact)
+		end
+	else
+		while (img.columns * (1 - fact) >= elem_photos['width'] && img.rows * (1 - fact) >= elem_photos['hight']) do
+			img.scale!(1 - fact)
+		end
+	end
+	img.crop!(CenterGravity, elem_photos['width'], elem_photos['hight'])
+	return img
+end
+
 # Get the data from json file
 if (ARGV.empty? == true)
 	exit
@@ -37,17 +51,18 @@ photos.each do |elem|
 	img.background_color = 'black'
 
 	# Resize
-	fact = 0.2
-	if (img.columns <= elem['width'] || img.rows <= elem['hight'])
-		while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
-			img.scale!(1 + fact)
-		end
-	else
-		while (img.columns * (1 - fact) >= elem['width'] && img.rows * (1 - fact) >= elem['hight']) do
-			img.scale!(1 - fact)
-		end
-	end
-	img.crop!(CenterGravity, elem['width'], elem['hight'])
+	img = resize_img(0.2, img, elem)
+	#fact = 0.2
+	#if (img.columns <= elem['width'] || img.rows <= elem['hight'])
+	#	while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
+	#		img.scale!(1 + fact)
+	#	end
+	#else
+	#	while (img.columns * (1 - fact) >= elem['width'] && img.rows * (1 - fact) >= elem['hight']) do
+	#		img.scale!(1 - fact)
+	#	end
+	#end
+	#img.crop!(CenterGravity, elem['width'], elem['hight'])
 
 end
 
