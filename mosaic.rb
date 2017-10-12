@@ -35,7 +35,7 @@ photos.each do |elem|
 
 	# Resize
 	#size = 1.2
-	while (img.columns <= elem['width'] || img.rows <= elem['hight'])
+	while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
 		img.scale!(1.2)
 		#size += 0.2
 		puts "col loop = #{img.columns}"
@@ -80,7 +80,18 @@ rslt = Image.new(data['width'], data['hight']) {
 	self.format = 'JPG'
 }
 rslt.composite!(mosaic, 0, 0, OverCompositeOp)
-rslt.write("rslt.jpg")
+
+# Calculate the quality
+quality = 1
+while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
+	quality += 1
+end
+
+# Write the result
+puts "\nQuality = #{quality}"
+puts "\nfilesize = #{size}"
+rslt.write("rslt.jpg") { self.quality = quality }
+puts "filesize = #{rslt.filesize}"
 
 
 #rslt = Image.new(2000, 2000) {
@@ -127,4 +138,3 @@ rslt.write("rslt.jpg")
 #
 #rslt.write("rslt.jpg") { self.quality = 1 }
 #puts "filesize = #{rslt.filesize}"
-
