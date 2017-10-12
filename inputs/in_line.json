@@ -1,0 +1,43 @@
+{
+	"filesize": 50,
+	"hight": 400,
+	"width" : 1500,
+	"photos": [
+		{
+			"src": "http://hairstylecamp.com/wp-content/uploads/cat-1.jpg",
+			"hight": 100,
+			"width": 20,
+			"pos_x": 1,
+			"pos_y": 0
+		},
+		{
+			"src": "http://i.imgur.com/M0DynYB.jpg",
+			"hight": 100,
+			"width": 20,
+			"pos_x": 0,
+			"pos_y": 0
+		},
+		{
+			"src": "http://www.kamemivillage.com/img/market.jpg",
+			"hight": 100,
+			"width": 20,
+			"pos_x": 2,
+			"pos_y": 0
+		},
+		{
+			"src": "http://eatcleanfit2a.com/wp-content/uploads/2016/01/maigrir-vite-sans-r%C3%A9gime-sans-sport-niaque-gain-vitesse-reussir-success.jpg",
+			"hight": 100,
+			"width": 20,
+			"pos_x": 3,
+			"pos_y": 0
+		},
+		{
+			"src": "http://www.voyagevoyage.ca/image/policy:1.1472758:1425072901/Chocolats.jpg?a=16%3A9&$p$a=2fd64ef&683",
+			"hight": 100,
+			"width": 20,
+			"pos_x": 4,
+			"pos_y": 0
+		}
+
+	]
+}

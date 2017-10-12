@@ -3,7 +3,12 @@ require 'rmagick'
 include Magick
 
 # Get the data from json file
-file = File.read('inputs/test.json')
+if (ARGV.empty? == true)
+	exit
+end
+(index = ARGV[0].rindex('/') + 1) rescue index = 0
+filename = ARGV[0][index..-1]
+file = File.read(ARGV[0]) rescue exit
 data = JSON.parse(file)
 photos = data['photos']
 puts photos
@@ -80,7 +85,6 @@ y.times do |j|
 end
 
 mosaic = img.mosaic
-mosaic.write("momo.jpg")
 
 # Contruct the image resulting
 rslt = Image.new(data['width'], data['hight']) {
@@ -99,5 +103,6 @@ end
 # Write the result
 puts "Quality = #{quality}"
 puts "filesize asked = #{size}"
-rslt.write("rslt.jpg") { self.quality = quality }
+rslt.write("outputs/rslt_" + filename[0..-6] + ".jpg") { self.quality = quality } \
+rescue rslt.write("rslt_" + filename[0..-6] + ".jpg") { self.quality = quality }
 puts "filesize = #{rslt.filesize}"
