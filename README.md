@@ -1,5 +1,7 @@
 # Cheerz_Mosaic
 
+## Description ##
+
 A ruby script in command-line to create a mosaic based on the images passed in argument
 
 Input : one JSON file with
@@ -14,3 +16,11 @@ Input : one JSON file with
 		- 'width' : width of the image of the mosaic size in %
 
 Output : one JPG file
+
+## How to use ##
+
+`` `bundle install
+ruby mosaic.rb inputs/[file.json]` ``
+
+To run all inputs :
+`` `sh run_tests.sh` ``
