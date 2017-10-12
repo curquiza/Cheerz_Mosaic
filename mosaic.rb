@@ -44,26 +44,12 @@ end
 # Sort the array 'photos'
 photos = photos.sort_by{ |elem| [elem['pos_y'], elem['pos_x']] }
 
-# Get the photo in ImageList
+# Get and resize the photo in ImageList
 img = ImageList.new
 photos.each do |elem|
 	img.read(elem['src'])
 	img.background_color = 'black'
-
-	# Resize
 	img = resize_img(0.2, img, elem)
-	#fact = 0.2
-	#if (img.columns <= elem['width'] || img.rows <= elem['hight'])
-	#	while (img.columns <= elem['width'] || img.rows <= elem['hight']) do
-	#		img.scale!(1 + fact)
-	#	end
-	#else
-	#	while (img.columns * (1 - fact) >= elem['width'] && img.rows * (1 - fact) >= elem['hight']) do
-	#		img.scale!(1 - fact)
-	#	end
-	#end
-	#img.crop!(CenterGravity, elem['width'], elem['hight'])
-
 end
 
 # Construct the mosaic
@@ -96,14 +82,6 @@ rslt = Image.new(data['width'], data['hight']) {
 }
 rslt.composite!(mosaic, 0, 0, OverCompositeOp)
 
-# Calculate the quality
-quality = calc_quality(data['filesize'], rslt)
-#quality = 1
-#size = data['filesize'] * 1000
-#while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
-#	quality += 1
-#end
-
 # Write the result
-rslt.write("outputs/rslt_" + filename[0..-6] + ".jpg") { self.quality = quality } \
-rescue rslt.write("rslt_" + filename[0..-6] + ".jpg") { self.quality = quality }
+rslt.write("outputs/rslt_" + filename[0..-6] + ".jpg") { self.quality = calc_quality(data['filesize'], rslt) } \
+rescue rslt.write("rslt_" + filename[0..-6] + ".jpg") { self.quality = calc_quality(data['filesize'], rslt) }
