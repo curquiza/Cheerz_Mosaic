@@ -83,13 +83,14 @@ rslt.composite!(mosaic, 0, 0, OverCompositeOp)
 
 # Calculate the quality
 quality = 1
+size = data['filesize'] * 1000
 while (quality < 100 && rslt.to_blob{ self.quality = quality }.bytesize < size) do
 	quality += 1
 end
 
 # Write the result
 puts "\nQuality = #{quality}"
-puts "\nfilesize = #{size}"
+puts "\nfilesize asked = #{size}"
 rslt.write("rslt.jpg") { self.quality = quality }
 puts "filesize = #{rslt.filesize}"
 
