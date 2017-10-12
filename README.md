@@ -12,8 +12,8 @@ A ruby script in command-line to create a mosaic based on the images passed in a
    - 'src' : URL address
    - 'pos_x' : position in the mosaic (columns)
    - 'pos_y' : position in the mosaic (rows)
-   - 'hight' : hight of the image of the mosaic size in %
-   - 'width' : width of the image of the mosaic size in %
+   - 'hight' : hight of the image in % of the mosaic size
+   - 'width' : width of the image in % of the mosaic size
 
 **Output : a JPG file**
 
