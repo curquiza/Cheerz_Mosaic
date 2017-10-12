@@ -66,7 +66,6 @@ end
 # Construct the mosaic
 col = 0
 row = 0
-img_cpy = ImageList.new
 page = Rectangle.new(0, 0, 0, 0)
 img.scene = 0
 y = photos.uniq { |elem| elem['pos_y'] }.length
@@ -75,18 +74,17 @@ y.times do |j|
 	col = 0
 	x = photos.count { |elem| elem['pos_y'] == j }
 	x.times do
-		img_cpy << img.scale(1)
 		page.x = col
 		page.y = row
-		img_cpy.page = page
-		col += img_cpy.columns
-		tmp_row = img_cpy.rows if (tmp_row < img_cpy.rows)
+		img.page = page
+		col += img.columns
+		tmp_row = img.rows if (tmp_row < img.rows)
 		(img.scene += 1) rescue img.scene = 0
 	end
 	row += tmp_row
 end
 
-mosaic = img_cpy.mosaic
+mosaic = img.mosaic
 
 # Contruct the image resulting
 rslt = Image.new(data['width'], data['hight']) {
