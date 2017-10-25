@@ -1,4 +1,4 @@
-# Cheerz_Mosaic
+# Mosaic
 
 ## Description ##
 
